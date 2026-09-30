@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ITJK.com - Luke 的数字工具与技术实验室</title>
+  <title>IT极客-Luke-用技术打造实用工具</title>
   <meta name="description" content="ITJK 是 Luke 的数字工具与技术实验室，持续探索 IT 技术并打造简单、可靠、好用的在线工具。" />
   <link rel="canonical" href="https://itjk.com" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -70,13 +70,18 @@
       <button class="dialog-close" type="button" aria-label="关闭" onclick="document.getElementById('contact-dialog').close()">×</button>
       <h2>联系 ITJK</h2>
       <div class="contact-list">
-        <div class="contact-item"><span>微信号</span><strong>itjkcom</strong></div>
+        <div class="contact-item"><span>微信号</span><strong>wujiim</strong></div>
         <div class="contact-item"><span>邮箱</span><strong>6182768@qq.com</strong></div>
       </div>
     </div>
   </dialog>
   <script>
     document.querySelectorAll('a').forEach(function (link) {
+      if (link.getAttribute('href').startsWith('#')) {
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+        return;
+      }
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
     });
