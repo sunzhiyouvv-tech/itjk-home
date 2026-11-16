@@ -1,3 +1,89 @@
 html { overflow-x: hidden; }
 .aurora { position: fixed; }
 
+.hero h1 {
+  max-width: 1040px;
+  font-size: clamp(56px, 6.8vw, 92px);
+  line-height: 1.04;
+}
+
+.hero h1 span {
+  display: inline-block;
+  margin-top: .26em;
+  font-size: .76em;
+  line-height: 1.16;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 36px;
+}
+
+.page-btn,
+.page-ellipsis {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 13px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13px;
+}
+
+.page-btn {
+  border: 1px solid #d4dbe1;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.page-btn:hover:not(:disabled),
+.page-btn.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.page-btn:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+}
+
+.page-btn.page-nav {
+  min-width: 84px;
+}
+
+.page-ellipsis {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .hero h1 {
+    font-size: 43px;
+    line-height: 1.08;
+  }
+
+  .hero h1 span {
+    margin-top: .38em;
+    font-size: .66em;
+    line-height: 1.35;
+  }
+
+  .page-btn,
+  .page-ellipsis {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 10px;
+  }
+
+  .page-btn.page-nav {
+    min-width: 72px;
+  }
+}
+
