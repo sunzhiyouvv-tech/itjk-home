@@ -1,5 +1,5 @@
 Exit code: 0
-Wall time: 1.2 seconds
+Wall time: 1.7 seconds
 Output:
 :root {
   --ink: #2b1218;
@@ -172,8 +172,8 @@ body {
 .cta { background: linear-gradient(120deg, #fb7185, #e11d48 58%, #9f1239); color: #fff; box-shadow: 0 25px 70px rgba(159,18,57,.22); }
 .cta h2 { font-size: 42px; }
 .cta p { color: #fff1f3; font-size: 16px; }
-.cta > a { background: #fff; color: var(--deep-red); }
-.cta > a b { color: var(--red); }
+.cta > a, .cta > button { width: 150px; height: 150px; border: 0; border-radius: 50%; background: #fff; color: var(--deep-red); display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; font: inherit; font-weight: 600; gap: 9px; cursor: pointer; }
+.cta > a b, .cta > button b { color: var(--red); }
 footer { border-top-color: #ead0d6; font-size: 13px; }
 footer > a:last-child { color: var(--deep-red); font-size: 14px; }
 .toast { background: var(--deep-red); font-size: 14px; }
@@ -227,6 +227,7 @@ footer > a:last-child { color: var(--deep-red); font-size: 14px; }
   .process { padding: 52px 26px; }
   .steps p { font-size: 15px; }
   .cta h2 { font-size: 33px; }
+  .cta > button { width: auto; height: auto; padding: 15px 20px; border-radius: 99px; flex-direction: row; }
   footer { font-size: 13px; }
   .quote-form { padding: 32px 20px 24px; }
   .quote-form h2 { font-size: 29px; }
