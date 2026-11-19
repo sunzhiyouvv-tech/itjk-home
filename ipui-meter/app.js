@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 1.8 seconds
-Output:
 const state = { all: [], query: '', suffix: 'all', page: 1, pageSize: 12 };
 
 const el = {
@@ -203,4 +200,3 @@ document.addEventListener('keydown', event => {
 });
 
 document.querySelector('#year').textContent = new Date().getFullYear();
-
