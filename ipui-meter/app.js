@@ -104,6 +104,32 @@ document.querySelector('#suffixMetric').textContent = new Set(staticDomains.map(
 initFilters();
 render();
 
+function loadDeferredDomains() {
+  const scripts = [2, 3, 4, 5].map(part => new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = `domains-data-${part}.js?v=20261119-2`;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  }));
+  Promise.all(scripts).then(() => {
+    state.all = window.DOMAIN_DATA;
+    document.querySelector('#totalMetric').textContent = `${state.all.length}+`;
+    document.querySelector('#suffixMetric').textContent = new Set(state.all.map(domain => domain.suffix)).size;
+    initFilters();
+    render();
+  }).catch(() => {
+    // 首批域名已可正常浏览，后台数据失败时不阻塞页面。
+  });
+}
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(loadDeferredDomains, { timeout: 800 });
+} else {
+  setTimeout(loadDeferredDomains, 80);
+}
+
 el.search.addEventListener('input', event => {
   state.query = event.target.value.trim().toLowerCase();
   state.page = 1;
