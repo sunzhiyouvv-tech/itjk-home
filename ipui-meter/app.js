@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 1.1 seconds
+Output:
 const state = { all: [], query: '', suffix: 'all', page: 1, pageSize: 12 };
 
 const el = {
@@ -9,6 +12,9 @@ const el = {
   empty: document.querySelector('#emptyState'),
   clear: document.querySelector('#clearBtn'),
   toast: document.querySelector('#toast'),
+  dialog: document.querySelector('#quoteDialog'),
+  quoteForm: document.querySelector('#quoteForm'),
+  quoteDomain: document.querySelector('#quoteDomain'),
 };
 
 const escapeHtml = value => String(value).replace(/[&<>"]/g, char => ({
@@ -30,7 +36,7 @@ function card(domain) {
     </div>
     <h3>${escapeHtml(domain.domain)}</h3>
     <p>${escapeHtml(domain.meaning || '优质品牌域名')}</p>
-    <a class="inquiry" href="mailto:mail@itjk.com?subject=${subject}&body=${body}">立即询价 <span>↗</span></a>
+    <button class="inquiry offer-btn" type="button" data-offer="${escapeHtml(domain.domain)}">直接出价 <span>↗</span></button>
   </article>`;
 }
 
@@ -136,12 +142,57 @@ el.clear.addEventListener('click', () => {
 });
 
 el.grid.addEventListener('click', async event => {
+  const offerButton = event.target.closest('[data-offer]');
+  if (offerButton) {
+    openQuote(offerButton.dataset.offer);
+    return;
+  }
   const button = event.target.closest('[data-copy]');
   if (!button) return;
   await navigator.clipboard.writeText(button.dataset.copy);
   el.toast.textContent = `已复制 ${button.dataset.copy}`;
   el.toast.classList.add('show');
   setTimeout(() => el.toast.classList.remove('show'), 1800);
+});
+
+function openQuote(domain = '') {
+  el.quoteDomain.value = domain;
+  el.dialog.showModal();
+  setTimeout(() => (domain ? el.quoteForm.elements.offer : el.quoteDomain).focus(), 50);
+}
+
+document.querySelectorAll('.quote-trigger').forEach(button =>
+  button.addEventListener('click', () => openQuote())
+);
+
+document.querySelector('.dialog-close').addEventListener('click', () => el.dialog.close());
+el.dialog.addEventListener('click', event => {
+  if (event.target === el.dialog) el.dialog.close();
+});
+
+el.quoteForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(el.quoteForm);
+  const phone = String(data.get('phone') || '').trim();
+  const email = String(data.get('email') || '').trim();
+  if (!phone && !email) {
+    el.toast.textContent = '请至少填写电话或邮箱';
+    el.toast.classList.add('show');
+    setTimeout(() => el.toast.classList.remove('show'), 2200);
+    return;
+  }
+  const domain = String(data.get('domain') || '').trim();
+  const subject = encodeURIComponent(`域名报价：${domain}`);
+  const body = encodeURIComponent([
+    `选中域名：${domain}`,
+    `报价：${data.get('offer')}`,
+    `称呼：${data.get('name')}`,
+    `电话：${phone || '未填写'}`,
+    `邮箱：${email || '未填写'}`,
+    `补充说明：${data.get('message') || '无'}`,
+  ].join('\n'));
+  window.location.href = `mailto:mail@itjk.com?subject=${subject}&body=${body}`;
+  el.dialog.close();
 });
 
 document.addEventListener('keydown', event => {
