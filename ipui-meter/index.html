@@ -1,5 +1,5 @@
 Exit code: 0
-Wall time: 1.2 seconds
+Wall time: 1.7 seconds
 Output:
 <!doctype html>
 <html lang="zh-CN">
@@ -10,9 +10,6 @@ Output:
   <meta name="theme-color" content="#9f1239" />
   <title>爱谱优米表｜精选品牌域名</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2307111f'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='36' fill='%23b6f23c'%3E%E7%88%B1%3C/text%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="fixes.css" />
 </head>
@@ -40,8 +37,8 @@ Output:
       <div class="hero-actions hero-contact-grid">
         <a class="primary-btn" href="#domains">探索域名 <span>↘</span></a>
         <button class="contact-tile quote-trigger" type="button"><b>联系询价</b><small>在线出价 · 留下联系方式</small></button>
-        <button class="contact-tile quote-trigger" type="button"><b>电话回拨</b><small>留下手机 · 方便洽谈</small></button>
-        <a class="contact-tile" href="mailto:mail@itjk.com?subject=爱谱优域名咨询"><b>邮箱</b><small>mail@itjk.com</small></a>
+        <button class="contact-tile copy-contact" type="button" data-contact="abc365jxbd"><b>微信</b><small>abc365jxbd · 点击复制</small></button>
+        <a class="contact-tile" href="mailto:13388003168@163.com?subject=爱谱优域名咨询"><b>邮箱</b><small>13388003168@163.com</small></a>
       </div>
       <div class="metrics">
         <div><strong id="totalMetric">—</strong><span>精选域名</span></div>
@@ -88,14 +85,14 @@ Output:
 
     <section class="cta shell">
       <div><span>YOUR NEXT GREAT NAME</span><h2>还没找到心仪的名字？</h2><p>告诉我们你的行业、关键词与预算，开启专属寻名服务。</p></div>
-      <a href="mailto:mail@itjk.com?subject=爱谱优米表定向寻名需求">开始沟通 <b>↗</b></a>
+      <button class="quote-trigger" type="button">开始沟通 <b>↗</b></button>
     </section>
   </main>
 
   <footer class="shell">
     <a class="brand" href="#top"><span class="brand-mark">爱</span><span><b>爱 谱 优</b></span></a>
     <p>© <span id="year"></span> 爱谱优米表 · IPUI.CN</p>
-    <a href="mailto:mail@itjk.com">mail@itjk.com</a>
+    <a href="mailto:13388003168@163.com">13388003168@163.com</a>
   </footer>
   <div id="toast" class="toast">域名已复制</div>
   <dialog id="quoteDialog" class="quote-dialog">
@@ -114,10 +111,11 @@ Output:
         <label>电子邮箱<input name="email" type="email" placeholder="name@example.com"></label>
       </div>
       <label>补充说明<textarea name="message" rows="3" placeholder="用途、预算或方便联系的时间"></textarea></label>
-      <p class="form-hint">电话和邮箱至少填写一项。提交后将打开邮件发送，收件人为 mail@itjk.com。</p>
+      <p class="form-hint">电话和邮箱至少填写一项。提交后将打开邮件发送，收件人为 13388003168@163.com。</p>
       <button class="submit-offer" type="submit">提交报价，开始议价 <span>↗</span></button>
     </form>
   </dialog>
+  <script src="domains-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
