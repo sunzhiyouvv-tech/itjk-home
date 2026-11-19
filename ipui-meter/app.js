@@ -1,5 +1,5 @@
 Exit code: 0
-Wall time: 1.1 seconds
+Wall time: 1.8 seconds
 Output:
 const state = { all: [], query: '', suffix: 'all', page: 1, pageSize: 12 };
 
@@ -100,21 +100,12 @@ function initFilters() {
     suffixes.map(([suffix, count]) => `<button class="filter-btn" data-suffix="${suffix}">.${suffix} ${count}</button>`).join('');
 }
 
-fetch('domains.json')
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
-  })
-  .then(data => {
-    state.all = data;
-    document.querySelector('#totalMetric').textContent = `${data.length}+`;
-    document.querySelector('#suffixMetric').textContent = new Set(data.map(domain => domain.suffix)).size;
-    initFilters();
-    render();
-  })
-  .catch(() => {
-    el.count.textContent = '域名数据加载失败，请刷新重试';
-  });
+const staticDomains = Array.isArray(window.DOMAIN_DATA) ? window.DOMAIN_DATA : [];
+state.all = staticDomains;
+document.querySelector('#totalMetric').textContent = `${staticDomains.length}+`;
+document.querySelector('#suffixMetric').textContent = new Set(staticDomains.map(domain => domain.suffix)).size;
+initFilters();
+render();
 
 el.search.addEventListener('input', event => {
   state.query = event.target.value.trim().toLowerCase();
@@ -165,6 +156,15 @@ document.querySelectorAll('.quote-trigger').forEach(button =>
   button.addEventListener('click', () => openQuote())
 );
 
+document.querySelectorAll('.copy-contact').forEach(button =>
+  button.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(button.dataset.contact);
+    el.toast.textContent = `微信已复制：${button.dataset.contact}`;
+    el.toast.classList.add('show');
+    setTimeout(() => el.toast.classList.remove('show'), 2200);
+  })
+);
+
 document.querySelector('.dialog-close').addEventListener('click', () => el.dialog.close());
 el.dialog.addEventListener('click', event => {
   if (event.target === el.dialog) el.dialog.close();
@@ -191,7 +191,7 @@ el.quoteForm.addEventListener('submit', event => {
     `邮箱：${email || '未填写'}`,
     `补充说明：${data.get('message') || '无'}`,
   ].join('\n'));
-  window.location.href = `mailto:mail@itjk.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:13388003168@163.com?subject=${subject}&body=${body}`;
   el.dialog.close();
 });
 
